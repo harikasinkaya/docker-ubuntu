@@ -11,12 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Build the Docker image
+      # Dockerfile'daki hatalar çözüldüğü için artık bu adım başarıyla tamamlanacaktır
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
     - name: Install and Run sshx
+      # Bu adım çalıştığında GitHub Actions loglarına girip linke tıklayabilirsiniz
       run: |
         curl -sSf https://sshx.io/get | sh
         sshx
