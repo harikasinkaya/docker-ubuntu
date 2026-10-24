@@ -1,20 +1,13 @@
-FROM ubuntu:trusty
+FROM ubuntu:20.04
 
-MAINTAINER Filipe Brandão <fdabrandao@dcc.fc.up.pt>
+# MAINTAINER yerine güncel kullanım olan LABEL kullanıyoruz
+LABEL maintainer="isim@ornek.com"
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade && \
-    apt-get -y install software-properties-common && \
-    add-apt-repository ppa:fkrull/deadsnakes
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y install \
-    make \
-    g++-4.8 \
-    python2.7 \
-    python-pip \
-    python-dev \
-    python3.5 \
-    python3-pip \
-    python3.5-dev \
-    python-virtualenv \
-    glpk-utils
+# PPA deposunu güncel deadsnakes/ppa olarak değiştiriyoruz
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-common && \
+    add-apt-repository -y ppa:deadsnakes/ppa && \
+    apt-get update
+    
+# Kendi projenize ait diğer komutlarınızı buranın altına ekleyebilirsiniz...
